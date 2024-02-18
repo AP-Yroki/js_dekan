@@ -152,10 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function spawnMonstersAndTraps() {
         monsters.forEach(monster => gameField.removeChild(monster));
         monsters = [];
-    
-        traps.forEach(trap => gameField.removeChild(trap));
-        traps = [];
-    
+
         for (let i = 0; i < 10; i++) {
             const monster = document.createElement('div');
             monster.className = 'monster';
@@ -163,10 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
             monster.style.left = `${Math.random() * (gameField.offsetWidth - 20)}px`;
             gameField.appendChild(monster);
             monsters.push(monster);
-
         }
-    
-        for (let i = 0; i < 2; i++) {
+
+        if (traps.length < 2) {
             const trap = document.createElement('div');
             trap.className = 'trap';
             const trapX = Math.random() * (gameField.offsetWidth - 20);
@@ -174,9 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
             trap.style.top = `${trapY}px`;
             trap.style.left = `${trapX}px`;
             gameField.appendChild(trap);
-            
+            traps.push(trap);
         }
     }
+    
     
 
     function checkCollisions() {
